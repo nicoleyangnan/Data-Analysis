@@ -1,0 +1,50 @@
+探索性数据分析（EDA）
+定义
+Look at data to see what it seems to say
+Uncover underlying structures
+Isolate important variables
+Detect outliers and other anomalies
+Suggest suitable models for conventional statistics
+
+绘图：原始数据、统计图（均值，箱型图，直方图，。。。）、集合特征
+
+1. 时序图：便于观察数据特点
+2. 直方图/密度曲线图：便于观察数据分布
+3. 箱型图：便于查看数据的异常状况，以及不同数据间分布的对比
+4. 小提琴图：进阶版箱型图，可以看出某个值附近分布的频率
+
+量化方法
+
+相关性分析
+1. 定类变量： 名义型变量（性别）
+2. 定序变量：不仅分类，还按某种特性排序，两值的差无意义（教育程度）
+3. 定距变量： 可比较大小、差有意义的变量
+		定类		定序			定距
+定类		卡方类测量	卡方类测量		Eta系数
+定序				Spearman相关系数		Spearman相关系数
+				同序-异序对测量		
+定距							Pearson相关系数
+
+独立性分析
+变量间无线性相关性，还可能存在非线性关联
+
+代码实战
+1. 数据概览
+describe:每列的统计量
+info：数据每列的type，有助于了解是否存在除了nan意外的特殊符号异常
+
+2. 判断缺失与异常
+is_null:查看确实
+value_count：查看数据情况
+
+3. 绘制数据分布：seaborn
+
+4. 统计数值变量相关性: corr()
+
+5. 统计特征的偏度和峰度：pandas
+偏度：skew()
+峰度：kurt()
+
+6. 绘制特征之间的关系图: pairplot
+
+7. 绘制类别特征分布图: boxplot
