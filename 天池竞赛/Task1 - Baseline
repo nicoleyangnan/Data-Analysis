@@ -1,0 +1,73 @@
+Baseline
+STEP1 导入函数工具箱：
+1. 基础工具：
+import numpy as np
+import pandas as pd
+import warnings
+import matplotlib
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.special import jn
+from Ipython.display import display, clear_output
+import time
+
+2. 模型预测
+from sklearn import linear_model
+from sklearn import preprocessing
+from sklearn.svm import SVR
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+
+3. 数据降维处理
+from sklearn.decomposition import PCA, FastICA, FactorAnalysis, SparsePCA
+import lightgbm as lgb
+import xgboost as xgb
+
+4， 参数搜索与评价
+from sklearn.model_selection import GridSearchCV, cross_val_score, StratifiedKFold,train_test_split
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+
+STEP2 数据读取：pandas.read_csv(filepath, sep='')
+Train_data & Test_data
+1. 简要浏览
+Train_data.head()
+
+2. 数据统计信息浏览:发现异常，分析分布情况（训练样本与测试样本分布是否一致）
+Train_data.describe()
+Test_data.describe()
+
+STEP3 特征与标签构建
+1) 提取数值类型特征类名
+数值列：numerical_cols = Train_data.select_dtypes(exclude = 'object').columns
+非数值列：categorical_cols = Train_data.select_dtypes(include = 'object').columns
+2) 构建训练和测试样本: 
+##选择特征列
+feature_cols = [col for col in numerical_cols if col not in ['SaleID','name','regDate','createDate','price','model']]
+feature_cols = [col for col in feature_cols if 'Type' not in col]
+
+##提前特征列、标签列构造训练样本和测试样本
+X_data = Train_data[feature.cols]
+Y_data = Train_data['price']
+
+X_test = TestA_data[feature_cols]
+
+3) 统计标签的基本分布信息
+Sta_inf(Y_data)
+##绘制标签的统计图，查看标签分布
+plt.hist(Y_data)
+plt.show()
+plt.close()
+4) 缺省值用-1填补
+X_data.fillna(-1)
+
+STEP4 模型训练与预测
+1. 利用xgb进行五折交叉验证查看模型的参数效果（调参）:StratifiedKFold
+2. 定义xgb和lgb模型函数
+3， 切分数据集（Train, Val）进行模型训练，评价和预测
+4. 进行两模型的结果加权融合
+5. 输出结果
+
+分类指标：sklearn
+sklearn.metrics
+
+回归指标：sklearn
+sklearn.metris
